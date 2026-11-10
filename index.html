@@ -147,9 +147,87 @@ textarea.sum{font-family:var(--font-mono);font-size:12.5px;min-height:130px}
 @media (prefers-reduced-motion:reduce){.progress>i{transition:none}}
 </style>
 
+
+
+<style id="onboarding-visual-refresh">
+body:not(.ob-started){background:radial-gradient(ellipse at 50% 0%,#fff1b8 0%,#f2f5f7 48%,#e8eef2 100%)}
+#onboarding{max-width:760px;margin:0 auto;padding:clamp(30px,7vh,68px) 0 48px}
+#onboarding .ob-kicker{display:inline-flex;align-items:center;gap:8px;background:#12202B;color:#fff;padding:8px 13px;border-radius:999px;font:700 11px/1.2 ui-monospace,monospace;letter-spacing:.14em;box-shadow:0 5px 0 #d4ad2e}
+#onboarding h1{font-family:var(--font-display);font-size:clamp(27px,6.2vw,39px);line-height:1.24;letter-spacing:-.025em;margin:18px 0 10px;color:#12202B}
+#onboarding h1 mark{padding:0 .14em;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+#onboarding .ob-desc{font-size:14px;color:#52616c;margin-bottom:22px}
+#onboarding .ob-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+#onboarding .ob-option{position:relative;display:flex;gap:13px;align-items:flex-start;text-align:left;width:100%;min-height:126px;padding:18px 16px;background:rgba(255,255,255,.96);border:2px solid #dce3e8;border-radius:16px;cursor:pointer;color:#12202B;box-shadow:0 5px 0 rgba(18,32,43,.07);transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease,background .16s ease}
+#onboarding .ob-option:hover{transform:translateY(-3px);border-color:#aab8c2;box-shadow:0 8px 0 rgba(18,32,43,.08)}
+#onboarding .ob-option[aria-pressed="true"]{border:3px solid #12202B;padding:17px 15px;background:#fff8d9;box-shadow:0 6px 0 #ffd84a;transform:translateY(-2px)}
+#onboarding .ob-option[aria-pressed="true"]::after{content:"선택됨";position:absolute;right:12px;top:10px;background:#12202B;color:#fff;border-radius:999px;padding:4px 8px;font-size:10px;font-weight:700}
+#onboarding .ob-num{display:grid;place-items:center;flex:0 0 40px;height:40px;border-radius:11px;background:#ffd84a;color:#12202B;font:800 20px/1 ui-monospace,monospace;box-shadow:inset 0 -3px 0 rgba(18,32,43,.12)}
+#onboarding .ob-option[aria-pressed="true"] .ob-num{background:#12202B;color:#ffd84a}
+#onboarding .ob-copy{display:grid;gap:7px;padding-top:2px;padding-right:2px}
+#onboarding .ob-copy strong{font-size:14px;line-height:1.5;font-weight:750}
+#onboarding .ob-copy small{font-size:11px;line-height:1.5;color:#64727c}
+#onboarding .ob-next{width:100%;min-height:58px;margin-top:24px;border-radius:14px;background:#12202B;color:#fff;font-size:17px;font-weight:800;letter-spacing:.01em;box-shadow:0 6px 0 #ffd84a;transition:transform .15s ease,opacity .15s ease}
+#onboarding .ob-next:not(:disabled):hover{transform:translateY(-2px);background:#263b4a}
+#onboarding .ob-next:disabled{opacity:.42;box-shadow:none;cursor:not-allowed}
+#onboarding .ob-hint{text-align:center;font-size:12px;color:#687782;margin-top:14px}
+@media(max-width:560px){
+ #onboarding{padding-top:30px}
+ #onboarding .ob-options{grid-template-columns:1fr;gap:10px}
+ #onboarding .ob-option{min-height:98px;padding:14px}
+ #onboarding .ob-option[aria-pressed="true"]{padding:13px}
+ #onboarding .ob-num{flex-basis:38px;height:38px;font-size:19px}
+ #onboarding .ob-copy strong{font-size:13px}
+ #onboarding .ob-desc{font-size:13px}
+}
+@media(prefers-reduced-motion:reduce){#onboarding .ob-option,#onboarding .ob-next{transition:none}}
+</style>
+
+
 </head>
 <body>
-<main id="app"><style id="sxcss">.sx .hid{position:absolute;opacity:0;pointer-events:none;width:1px;height:1px}
+
+<section id="onboarding" aria-labelledby="ob-title">
+  <div class="ob-kicker">EASYDAY · 시작하기</div>
+  <h1 id="ob-title">나의 계획 스타일은<br><mark>어떤 편인가요?</mark></h1>
+  <p class="ob-desc">가장 나와 가까운 항목 하나를 골라 주세요.</p>
+  <div class="ob-options" role="group" aria-label="계획 스타일 선택">
+    <button class="ob-option" type="button" data-ob-choice="1" aria-pressed="false"><span class="ob-num">1</span><span class="ob-copy"><strong>계획을 세우고 꾸준히 실천하는 편</strong><small>계획을 세우고 실천하는 것을 중요하게 생각해요.</small></span></button>
+    <button class="ob-option" type="button" data-ob-choice="2" aria-pressed="false"><span class="ob-num">2</span><span class="ob-copy"><strong>계획은 세우지만 실천은 다소 유동적인 편</strong><small>계획을 세우지만 상황에 따라 조정하기도 해요.</small></span></button>
+    <button class="ob-option" type="button" data-ob-choice="3" aria-pressed="false"><span class="ob-num">3</span><span class="ob-copy"><strong>계획을 세우지 않지만 생활을 잘 꾸려가는 편</strong><small>정해진 계획보다는 그때그때 자연스럽게 움직여요.</small></span></button>
+    <button class="ob-option" type="button" data-ob-choice="4" aria-pressed="false"><span class="ob-num">4</span><span class="ob-copy"><strong>계획을 세우지 않고 생활 관리도 다소 자유로운 편</strong><small>정해진 계획이나 생활 관리 방식이 아직 익숙하지 않아요.</small></span></button>
+  </div>
+  <button id="ob-next" class="btn ob-next" type="button" disabled>선택하고 다음으로 →</button><p id="ob-hint" class="ob-hint">나와 가장 가까운 항목 하나를 선택해 주세요.</p>
+</section>
+<script id="onboarding-logic">
+(()=>{
+  let selected = null;
+  const options = [...document.querySelectorAll("[data-ob-choice]")];
+  const next = document.getElementById("ob-next");
+  const choose = value => {
+    selected = value;
+    options.forEach(el => el.setAttribute("aria-pressed", String(el.dataset.obChoice === value)));
+    next.disabled = !selected;
+  };
+  options.forEach(el => el.addEventListener("click", () => choose(el.dataset.obChoice)));
+  next.addEventListener("click", () => {
+    if (!selected) return;
+    document.body.dataset.planStyle = selected;
+    document.body.classList.add("ob-started");
+    const intro = document.getElementById("onboarding");
+    const app = document.getElementById("app");
+    if (intro) intro.hidden = true;
+    if (app) {
+      app.hidden = false;
+      app.style.display = "block";
+      app.setAttribute("tabindex", "-1");
+      app.focus({preventScroll:true});
+    }
+    window.scrollTo(0, 0);
+  });
+})();
+</script>
+
+<main id="app" hidden style="display:none"><style id="sxcss">.sx .hid{position:absolute;opacity:0;pointer-events:none;width:1px;height:1px}
 .sx .pane,.sx .plan-s,.sx .dplan{display:none}
 .sx label.tab{display:grid;place-items:center;text-align:center}
 .sx .tabs{grid-template-columns:repeat(2,minmax(0,1fr))}
